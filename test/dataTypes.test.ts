@@ -1,7 +1,7 @@
 import { assertEquals } from "https://deno.land/std@0.182.0/testing/asserts.ts";
 import { describe, it } from "https://deno.land/std@0.182.0/testing/bdd.ts";
 
-import { ErrorType, SimpleStringType } from "src/dataTypes.ts";
+import { ErrorType, NilType, SimpleStringType } from "src/dataTypes.ts";
 
 const payload = "PAYLOAD";
 
@@ -30,5 +30,19 @@ describe("Simple String", () => {
     const simpleString = new SimpleStringType(payload);
 
     assertEquals(simpleString.encode(), `+${payload}\r\n`);
+  });
+});
+
+describe("Nil", () => {
+  it("should have the correct type string", () => {
+    const nil = new NilType();
+
+    assertEquals(nil.type, "nil");
+  });
+
+  it("should encode with an empty bulk string", () => {
+    const nil = new NilType();
+
+    assertEquals(nil.encode(), `$-1\r\n`);
   });
 });

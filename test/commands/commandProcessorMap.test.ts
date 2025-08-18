@@ -11,7 +11,7 @@ describe("Command Processor Map", () => {
   const bogusCommand = "BOGUS";
   const validCommand = "PING";
 
-  it("should return unknwon processor when command is not in the map", () => {
+  it("should return unknown processor when command is not in the map", () => {
     const processor = commandProcessorMap.get(bogusCommand);
 
     assertEquals(processor, unknownProcessor);

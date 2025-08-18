@@ -29,3 +29,12 @@ export class SimpleStringType implements DataType {
     return `+${this.payload}\r\n`;
   }
 }
+
+export class NilType implements DataType {
+  payload = null;
+  type = "nil";
+
+  encode(): string {
+    return `$-1\r\n`;
+  }
+}

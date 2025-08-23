@@ -38,3 +38,16 @@ export class NilType implements DataType {
     return `$-1\r\n`;
   }
 }
+
+export class IntegerType implements DataType {
+  payload: number;
+  type = "integer";
+
+  constructor(payload: number) {
+    this.payload = payload;
+  }
+
+  encode(): string {
+    return `:${this.payload}\r\n`;
+  }
+}

@@ -1,10 +1,10 @@
 import storage from "src/storage.ts";
-import { DataType, NilType, SimpleStringType } from "src/dataTypes.ts";
+import { DataType, IntegerType } from "src/dataTypes.ts";
 import Processor from "./processor.ts";
 import inputLengthValidator from "./validators/inputLengthValidator.ts";
 import notNullValidator from "./validators/notNullValidator.ts";
 
-const getProcessor: Processor = {
+const delProcessor: Processor = {
   process(command: string | null, args: (string | null)[]): DataType {
     const lengthValidationError = inputLengthValidator.validate(
       command,
@@ -13,15 +13,17 @@ const getProcessor: Processor = {
     );
     if (lengthValidationError) return lengthValidationError;
 
-    const nullKeyValidationError = notNullValidator.validate(args[0], "key");
-    if (nullKeyValidationError) return nullKeyValidationError;
-    const key = args[0]!;
+    let deletedKeys = 0;
+    for (const arg of args) {
+      const nullKeyValidationError = notNullValidator.validate(arg, "key");
+      if (nullKeyValidationError) return nullKeyValidationError;
+      const key = arg!;
 
-    const value = storage.get(key);
-    if (value) return new SimpleStringType(value);
+      if (storage.del(key)) deletedKeys++;
+    }
 
-    return new NilType();
+    return new IntegerType(deletedKeys);
   },
 };
 
-export default getProcessor;
+export default delProcessor;

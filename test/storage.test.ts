@@ -20,4 +20,17 @@ describe("Storage", () => {
 
     assertEquals(value, storedValue);
   });
+
+  it("Del returns true when deleting a present key", () => {
+    storage.set(presentKey, storedValue);
+    const value = storage.del(presentKey);
+
+    assertEquals(value, true);
+  });
+
+  it("Del returns false when deleting an absent key", () => {
+    const value = storage.del(absentKey);
+
+    assertEquals(value, false);
+  });
 });

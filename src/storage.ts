@@ -8,6 +8,10 @@ const storage = {
   get(key: string): string | undefined {
     return dataMap.get(key);
   },
+
+  del(key: string): boolean {
+    return dataMap.delete(key);
+  },
 };
 
 export default storage;

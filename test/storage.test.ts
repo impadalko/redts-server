@@ -33,4 +33,17 @@ describe("Storage", () => {
 
     assertEquals(value, false);
   });
+
+  it("Exists returns true when querying a present key", () => {
+    storage.set(presentKey, storedValue);
+    const value = storage.exists(presentKey);
+
+    assertEquals(value, true);
+  });
+
+  it("Del returns false when querying an absent key", () => {
+    const value = storage.exists(absentKey);
+
+    assertEquals(value, false);
+  });
 });

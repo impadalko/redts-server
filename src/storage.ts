@@ -12,6 +12,10 @@ const storage = {
   del(key: string): boolean {
     return dataMap.delete(key);
   },
+
+  exists(key: string): boolean {
+    return dataMap.has(key);
+  },
 };
 
 export default storage;

@@ -1,17 +1,13 @@
-import { assertEquals } from "https://deno.land/std@0.182.0/testing/asserts.ts";
-import {
-  afterEach,
-  describe,
-  it,
-} from "https://deno.land/std@0.182.0/testing/bdd.ts";
+import { assertEquals } from "@deno/std@0.182.0/testing/asserts.ts";
+import { afterEach, describe, it } from "@deno/std@0.182.0/testing/bdd.ts";
 
-import { Stub, stub } from "https://deno.land/std@0.186.0/testing/mock.ts";
+import { Stub, stub } from "@deno/std@0.186.0/testing/mock.ts";
 
-import existsProcessor from "src/commands/exists.ts";
-import storage from "src/storage.ts";
-import inputLengthValidator from "src/commands/validators/inputLengthValidator.ts";
-import notNullValidator from "src/commands/validators/notNullValidator.ts";
-import { ErrorType } from "src/dataTypes.ts";
+import existsProcessor from "@src/commands/exists.ts";
+import storage from "@src/storage.ts";
+import inputLengthValidator from "@src/commands/validators/inputLengthValidator.ts";
+import notNullValidator from "@src/commands/validators/notNullValidator.ts";
+import { ErrorType } from "@src/dataTypes.ts";
 
 describe("Get Processor", () => {
   let inputLengthValidatorStub: Stub;

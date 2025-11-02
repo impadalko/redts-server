@@ -1,4 +1,4 @@
-import { ErrorType } from "src/dataTypes.ts";
+import { ErrorType } from "@src/dataTypes.ts";
 
 const validator = {
   validate(

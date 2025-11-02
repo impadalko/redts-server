@@ -1,11 +1,11 @@
 import {
   assertEquals,
   assertNotEquals,
-} from "https://deno.land/std@0.182.0/testing/asserts.ts";
-import { describe, it } from "https://deno.land/std@0.182.0/testing/bdd.ts";
+} from "@deno/std@0.182.0/testing/asserts.ts";
+import { describe, it } from "@deno/std@0.182.0/testing/bdd.ts";
 
-import commandProcessorMap from "src/commands/commandProcessorMap.ts";
-import unknownProcessor from "src/commands/unknown.ts";
+import commandProcessorMap from "@src/commands/commandProcessorMap.ts";
+import unknownProcessor from "@src/commands/unknown.ts";
 
 describe("Command Processor Map", () => {
   const bogusCommand = "BOGUS";

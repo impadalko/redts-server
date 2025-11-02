@@ -1,4 +1,4 @@
-import { Args } from "https://deno.land/std/flags/mod.ts";
+import { Args } from "@deno/std/flags/mod.ts";
 
 import ConnectionProcessor from "./connectionProcessor.ts";
 

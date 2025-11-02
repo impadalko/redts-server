@@ -1,6 +1,8 @@
 {
   "imports": {
-    "src/": "./src/"
+    "@src/": "./src/",
+    "@deno/": "https://deno.land/",
+    "@github/": "https://raw.githubusercontent.com/"
   },
   "tasks": {
     "compile": "deno compile --output redts-server --allow-net src/main.ts",

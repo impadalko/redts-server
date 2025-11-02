@@ -1,20 +1,16 @@
 import {
   assertEquals,
   assertStringIncludes,
-} from "https://deno.land/std@0.182.0/testing/asserts.ts";
-import {
-  afterEach,
-  describe,
-  it,
-} from "https://deno.land/std@0.182.0/testing/bdd.ts";
+} from "@deno/std@0.182.0/testing/asserts.ts";
+import { afterEach, describe, it } from "@deno/std@0.182.0/testing/bdd.ts";
 
-import { Stub, stub } from "https://deno.land/std@0.186.0/testing/mock.ts";
+import { Stub, stub } from "@deno/std@0.186.0/testing/mock.ts";
 
-import ttlProcessor from "src/commands/ttl.ts";
-import storage from "src/storage.ts";
-import inputLengthValidator from "src/commands/validators/inputLengthValidator.ts";
-import notNullValidator from "src/commands/validators/notNullValidator.ts";
-import { ErrorType } from "src/dataTypes.ts";
+import ttlProcessor from "@src/commands/ttl.ts";
+import storage from "@src/storage.ts";
+import inputLengthValidator from "@src/commands/validators/inputLengthValidator.ts";
+import notNullValidator from "@src/commands/validators/notNullValidator.ts";
+import { ErrorType } from "@src/dataTypes.ts";
 
 describe("TTL Processor", () => {
   let inputLengthValidatorStub: Stub;

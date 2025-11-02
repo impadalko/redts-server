@@ -1,5 +1,5 @@
-import storage from "src/storage.ts";
-import { DataType, IntegerType } from "src/dataTypes.ts";
+import storage from "@src/storage.ts";
+import { DataType, IntegerType } from "@src/dataTypes.ts";
 import Processor from "./processor.ts";
 import inputLengthValidator from "./validators/inputLengthValidator.ts";
 import notNullValidator from "./validators/notNullValidator.ts";

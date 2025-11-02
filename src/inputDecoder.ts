@@ -1,4 +1,4 @@
-import * as Uint8ArrayUtil from "https://raw.githubusercontent.com/impadalko/redts-shared/main/src/uint8ArrayUtil.ts";
+import * as Uint8ArrayUtil from "@github/impadalko/redts-shared/main/src/uint8ArrayUtil.ts";
 
 class InputDecoder {
   textDecoder: TextDecoder;

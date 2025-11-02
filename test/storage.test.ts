@@ -41,9 +41,50 @@ describe("Storage", () => {
     assertEquals(value, true);
   });
 
-  it("Del returns false when querying an absent key", () => {
+  it("Exists returns false when querying an absent key", () => {
     const value = storage.exists(absentKey);
 
     assertEquals(value, false);
+  });
+
+  it("Expire returns false when updating an absent key", () => {
+    const value = storage.expire(absentKey, 0);
+
+    assertEquals(value, false);
+  });
+
+  it("Expire sets the ttl when updating a present key", () => {
+    storage.set(presentKey, storedValue);
+    const value = storage.expire(presentKey, 10);
+    assertEquals(value, true);
+
+    const ttl = storage.ttl(presentKey);
+    assertEquals(ttl > 0 && ttl <= 10, true);
+  });
+
+  it("Key expires after ttl", async () => {
+    storage.set(presentKey, storedValue);
+    storage.expire(presentKey, 1);
+
+    let value = storage.get(presentKey);
+    assertEquals(value, storedValue);
+
+    await new Promise((resolve) => setTimeout(resolve, 1100));
+
+    value = storage.get(presentKey);
+    assertEquals(value, undefined);
+  });
+
+  it("TTL returns -2 when querying an absent key", () => {
+    const value = storage.ttl(absentKey);
+
+    assertEquals(value, -2);
+  });
+
+  it("TTL returns -1 when querying a present key without ttl", () => {
+    storage.set(presentKey, storedValue);
+    const value = storage.ttl(presentKey);
+
+    assertEquals(value, -1);
   });
 });

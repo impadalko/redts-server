@@ -61,13 +61,16 @@ const proxy = new Proxy(storage, {
       return origMethod;
     }
     return function (...args: unknown[]) {
-      // This approach will only expire on method calls, not in the background
-      // This is a trade-off for simplicity and performance
-      // In the future, a background cleanup should be considered
       expireTTL(args[0] as string);
       return (origMethod as UnknownFunction).apply(null, args);
     };
   },
 });
+
+setInterval(() => {
+  for (const key of dataMap.keys()) {
+    expireTTL(key);
+  }
+}, 60000);
 
 export default proxy;

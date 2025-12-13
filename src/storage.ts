@@ -3,14 +3,16 @@ interface StoredValue {
   ttl?: number;
 }
 
-const dataMap = new Map<string, StoredValue>();
+const persistFile = "redts.json";
 
-function expireTTL(key: string) {
-  const storedValue = dataMap.get(key);
-  if (storedValue?.ttl && Date.now() > storedValue.ttl) {
-    dataMap.delete(key);
-  }
+let persistedData: string;
+try {
+  persistedData = Deno.readTextFileSync(persistFile);
+} catch {
+  persistedData = "[]";
 }
+
+const dataMap = new Map<string, StoredValue>(JSON.parse(persistedData));
 
 const storage = {
   set(key: string, value: string) {
@@ -51,6 +53,30 @@ const storage = {
   },
 };
 
+function expireTTL(key: string) {
+  const storedValue = dataMap.get(key);
+  if (storedValue?.ttl && Date.now() > storedValue.ttl) {
+    dataMap.delete(key);
+  }
+}
+
+async function persist() {
+  const jsonData = JSON.stringify(Array.from(dataMap.entries()));
+  await Deno.writeTextFile(persistFile, jsonData);
+}
+
+async function expireAndPersist() {
+  for (const key of dataMap.keys()) {
+    expireTTL(key);
+  }
+  await persist();
+  setTimeout(expireAndPersist, 60000);
+}
+
+if (Deno.env.get("DENO_ENV") !== "test") {
+  expireAndPersist();
+}
+
 type UnknownFunction = (...args: unknown[]) => unknown;
 
 const proxy = new Proxy(storage, {
@@ -66,11 +92,5 @@ const proxy = new Proxy(storage, {
     };
   },
 });
-
-setInterval(() => {
-  for (const key of dataMap.keys()) {
-    expireTTL(key);
-  }
-}, 60000);
 
 export default proxy;

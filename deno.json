@@ -6,7 +6,8 @@
   },
   "tasks": {
     "compile": "deno compile --output redts-server --allow-net src/main.ts",
-    "coverage": "deno test --coverage=avs && deno coverage avs --exclude=test/ && rm -rf avs",
-    "run": "deno run --allow-net --check=all src/main.ts"
+    "coverage": "DENO_ENV=test deno test --allow-env --coverage=avs && deno coverage avs --exclude=test/ && rm -rf avs",
+    "run": "deno run --allow-net --allow-read --allow-write --allow-env --check=all src/main.ts",
+    "test": "DENO_ENV=test deno test --allow-env"
   }
 }

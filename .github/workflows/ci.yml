@@ -21,4 +21,4 @@ jobs:
       - name: Format
         run: deno fmt --check
       - name: Test
-        run: deno test
+        run: deno task test
